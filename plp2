@@ -1,4 +1,87 @@
-### PLP 2: Data types and naming conventions (JavaScript)
-This document describes JavaScript’s basic data types, identifier (naming) rules
-and common naming conventions, shows a runnable code example that demonstrates mixing types,
-conversions, arrays/objects, and answers the discussion questions from the assignment.
+# PLP 2: Data Types and Naming Conventions (JavaScript)
+
+## Naming Rules & Conventions
+
+### Rules (required by the language)
+- JavaScript identifiers are case sensitive. 'myVar' and 'myvar' are different.
+- An identifier cannot start with a digit. It may start with a letter, $, or _. 
+Subsequent characters may include digits and Unicode letters. 
+- Reserved keywords (e.g., 'for', 'class', 'return', 'let') can't be used as identifiers.
+
+### Community Conventions
+- camelCase: variables and functions (myVariable, calculateTotal).
+- PascalCase: class/constructor names (Person, ShoppingCart).
+- UPPER_SNAKE_CASE: constants (style-dependent). 'snake_case' is less common, mostly in configs.
+- Conventions are enforced by linters, not the runtime. 
+
+
+
+## JavaScript Data Types
+
+Primitive: string, number, bigint, boolean, undefined, symbol, null
+Non-primitive: object (arrays, objects, functions, dates, etc.) 
+
+
+## Typing
+
+- Dynamically typed: type determined at runtime 
+- Weakly typed: JS performs implicit coercion
+
+
+## Mutability & Declarations
+
+- let: block-scoped, reassignable  
+- const: block-scoped, immutable binding (object/array values can still mutate)  
+- var: function-scoped 
+
+
+## Operators 
+
+- Arithmetic: '+ - * / % ** ('+' can concatenate strings)
+- Comparison: '==' (coercive), '===' (strict, no coercion) 
+- BigInt cannot mix with Number without conversion
+
+
+Assignment Example: "5" + 6
+
+- "5" + 6 → `"56"` (string concatenation)  
+- Use Number("5") + 6 for numeric addition
+
+
+## Discussion Answers
+
+1. Keywords/reserved words: Yes, many (if, else, class, return, let, etc.). 
+2. Naming requirements: Start with letter/$/_; subsequent chars may include digits; can't use reserved words 
+3. Naming conventions enforced? Community standards, enforced by linters 
+4. Static or dynamic typing? Dynamic 
+5. Strongly or weakly typed? Weak, due to coercion 
+6. Mutability: const makes binding immutable; object/array values can still mutate 
+7. Operators: Arithmetic, bitwise (Numbers/BigInt), concatenation (strings), property access/methods (objects/arrays)
+8. Mixed type operations: Allowed with coercion; BigInt cannot mix with Number 
+9. Binding time: var hoisted with undefined, let/const hoisted but uninitialized (TDZ) 
+10. Explicitly typed? Implicitly typed; runtime values carry types
+
+## Limitations & Pitfalls
+
+- Floating-point precision issues (`0.1 + 0.2 !== 0.3`) 
+- Implicit coercion surprises (==, +), prefers strict operators and explicit conversion 
+- Common complex types: Objects, Arrays, Map, Set, TypedArray, Date, Promise 
+
+
+## Sources
+
+https://developer.mozilla.org/en-US/docs/Glossary/Identifier  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Reserved_identifier  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar  
+https://developer.mozilla.org/en-US/docs/Glossary/Primitive  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types  
+https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators  
+https://developer.mozilla.org/en-US/docs/Glossary/Type_Conversion  
+https://developer.mozilla.org/en-US/docs/Glossary/Hoisting  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures
