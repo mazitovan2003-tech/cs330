@@ -1,0 +1,42 @@
+1) Boolean values in JavaScript
+	•	The boolean literals are true and false. 
+  In conditionals, non-boolean expressions are coerced to boolean using “truthy/falsy” rules (e.g., 0, "", null, undefined, NaN are falsy).  ￼
+
+2) Types of conditional statements available
+	•	if, else if, else (no single-word elseif).  ￼
+	•	switch / case / default.  ￼
+	•	The conditional (ternary) operator cond ? a : b is an expression form often used in place of short if/else. JavaScript does not have unless.  ￼
+
+3) How code blocks are delimited
+	•	Use braces { ... } to create a block under any branch. Single statements may omit braces, but common best practice is to always use braces to avoid ambiguity.  ￼
+
+4) Short-circuit evaluation
+	•	Yes. && evaluates left to right and stops when it finds a falsy operand; || stops when it finds a truthy operand; ?? stops if the left is non-nullish (i.e., not null/undefined). Optional chaining ?. stops if the left side is nullish. Bitwise operators (&, |) do not short-circuit. 
+// Else binds to the inner if:
+if (x)
+  if (y) doA();
+  else doB();  // belongs to `if (y)`
+
+// Clearer:
+if (x) {
+  if (y) { doA(); }
+  else { doB(); }
+}
+
+6) switch details: break, continue, evaluating all conditions
+	•	In JavaScript switch, you typically use break to prevent fall-through; without a break, execution continues into the next case (fall-through), which can be intentional. A return also exits a function (no break needed).
+	•	You cannot “continue” through all cases to force evaluation; continue inside a switch (not inside a loop) is a syntax error. Inside a loop that contains a switch, continue applies to the loop, not the switch.  ￼
+
+7) Loop types (and how they differ)
+	•	while (cond) { ... }: checks condition before each iteration.
+	•	do { ... } while (cond): runs the body at least once, checks condition after.  ￼
+	•	for (init; cond; step) { ... }: classic counter loop.
+	•	for...of: iterates values of an iterable (arrays, strings, Maps, Sets, etc.).  ￼
+	•	for...in: iterates enumerable property keys of an object (use with care and typically with hasOwnProperty).  ￼
+MDN has a good overview of all loop forms.  ￼
+
+8) Are loop code-block variables treated differently than function code blocks?
+	•	Yes, by choice of declaration:
+	•	var is function-scoped (or global if outside a function) and ignores block boundaries.
+	•	let and const are block-scoped — including loop blocks — and create a new binding per iteration in for loops (useful for closures).  ￼
+	•	Practical effect: for (var i...) leaves i visible after the loop; for (let i...) does not.
