@@ -1,0 +1,131 @@
+1) What is the syntax for declaring a function in JavaScript?
+
+JavaScript supports function declarations, function expressions, and arrow functions.
+
+// function declaration (hoisted)
+function add(a, b) { return a + b; }
+
+// function expression (not hoisted as a callable)
+const addExpr = function (a, b) { return a + b; };
+
+// arrow function (expression form; concise syntax)
+const addArrow = (a, b) => a + b;
+
+Function declarations are hoisted, which means their names are bound before runtime, so you can call them earlier in the file. Function expressions and arrow functions are not callable before their definition because the variable binding must exist first.
+
+Placement rules: In classic scripts, you can place a function declaration anywhere and still call it earlier thanks to hoisting. In ES modules, declarations are also hoisted within the module, but you still need to import/export correctly if you split code across files.
+
+2) Are there rules about where the function has to be placed so it can run?
+	•	Function declarations can be placed below their first use (hoisted).
+	•	Function expressions/arrow functions must be defined before use (no early call).
+	•	In modules, ensure you export/import appropriately; otherwise the function won’t be visible to other files.
+
+3) Does JavaScript support recursive functions?
+
+Yes. Any function can call itself (directly or indirectly). Example:
+
+function factorial(n) {
+  if (n === 0 || n === 1) return 1;
+  return n * factorial(n - 1);
+}
+
+Note: ES2015 specified “proper tail calls”, but most engines do not implement them, so very deep recursion can still overflow the call stack.
+
+4) Can functions accept multiple parameters? Can they be different types?
+
+Yes and yes. JavaScript is dynamically typed, so different calls can pass different types. You can also use:
+	•	Default parameters: function f(x = 0) { … }
+	•	Rest parameters: function sum(...nums) { /* nums is an array */ }
+
+Example:
+
+function mix(a, b, c = 0) {
+  return [typeof a, typeof b, typeof c];
+}
+
+5) Can functions return multiple values at the same time?
+
+There’s one return value, but idiomatic JS returns multiple values via an object or an array, then the caller uses destructuring:
+
+function coords() { return { x: 10, y: 20 }; }
+const { x, y } = coords();
+
+function pair() { return [10, 20]; }
+const [first, second] = pair();
+
+In the code above, splitInTwo returns an object with { first, second }, which is easy to destructure and self-documenting.
+
+6) Is JavaScript pass-by-reference or pass-by-value?
+
+JavaScript is pass-by-value.
+However, when you pass an object (or array/function), the value you pass is a reference to that object. Inside the function:
+	•	Reassigning the parameter to a new object does not affect the caller’s variable.
+	•	Mutating the object’s properties does affect the same object the caller holds.
+
+That’s exactly what the mutateThings demo shows:
+	•	The primitive prim remains 10 after the call.
+	•	The object box ends up with count: 1 because we changed its property.
+	•	Reassigning obj = { count: 999 } inside only changes the local parameter binding.
+
+7) Where are arguments, parameters, and local variables stored during execution?
+
+Conceptually:
+	•	Each function call creates a new execution context (a stack frame) with bindings for its parameters and locals—think call stack.
+	•	Objects/arrays/functions live on the heap, and stack frames hold references to them.
+	•	The exact placement is engine-dependent, but the mental model “primitives on the stack, objects on the heap (via references)” is accurate enough for reasoning.
+
+8) What are JavaScript’s scoping rules (visibility and lifetime)?
+	•	Lexical (static) scope: variables are resolved based on where code is written, not where it’s called.
+	•	var has function scope; let and const have block scope ({ ... }).
+	•	Lifetime: a local binding lives for the duration of the call. If an inner function closes over a variable, that variable can outlive the call—this is a closure.
+
+Example closure:
+function makeCounter() {
+  let count = 0;      // closed over
+  return function () {
+    count += 1;
+    return count;
+  };
+}
+const next = makeCounter();
+next(); // 1
+next(); // 2  (count persists via closure)
+
+9) Are side effects possible? Any guard rails?
+
+Yes, side effects are common (mutating objects, I/O, DOM updates). Guard rails include:
+	•	"use strict" (or using ES modules) to catch unsafe patterns (e.g., accidental globals).
+	•	const to prevent rebinding identifiers.
+	•	Object.freeze() (shallow) to prevent property changes.
+	•	Functional style (pure functions, immutability, copying via spread) to avoid side effects by convention.
+
+10) Where are local variable values stored (stack vs heap)?
+	•	Primitive locals (numbers, booleans, strings, null, undefined, bigint, symbol) are typically stored directly in the call frame (conceptually, stack).
+	•	Objects/arrays/functions are stored on the heap, and locals hold references to them.
+	•	Closures can keep environment records alive beyond a single call, so their captured variables persist in the engine’s heap-managed structures.
+
+11) Other important aspects to know
+	•	Hoisting: Function declarations are hoisted; function expressions/arrow functions are not callable before assignment.
+	•	Default/rest parameters simplify APIs. Spread (...) is great for copying to avoid side effects.
+	•	Async functions (async/await) return promises and are crucial for I/O without blocking.
+	•	Modules (import/export) provide file-level scoping and better organization.
+	•	Error handling: Use throw/try...catch for predictable failure modes.
+
+⸻
+
+How the provided code satisfies the assignment
+	•	Multiply function: multiply(a, b) returns a number.
+	•	Recursive function: factorial(n) uses a base case and a recursive step.
+	•	Return two strings: splitInTwo(str) returns an object with first and second strings.
+	•	Calls saved in variables: product, fact5, parts, partsNoSpace hold the results.
+	•	Pass-by test: mutateThings(prim, box) demonstrates primitives vs object references and shows the effect (or lack thereof) after the call.
+
+⸻
+
+Sources (concise, reliable)
+	1.	MDN Web Docs — Functions (declaration vs expression vs arrow, parameters, return):
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
+	2.	MDN Web Docs — Working with objects / Reference vs value (how object references behave):
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+	3.	MDN Web Docs — Memory management (stack/heap mental model, GC):
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management
