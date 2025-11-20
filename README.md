@@ -137,20 +137,74 @@ Assignment Example: "5" + 6
 - Common complex types: Objects, Arrays, Map, Set, TypedArray, Date, Promise 
 
 
-## Sources
 
-https://developer.mozilla.org/en-US/docs/Glossary/Identifier  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Reserved_identifier  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar  
-https://developer.mozilla.org/en-US/docs/Glossary/Primitive  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types  
-https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators  
-https://developer.mozilla.org/en-US/docs/Glossary/Type_Conversion  
-https://developer.mozilla.org/en-US/docs/Glossary/Hoisting  
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures
+
+# PLP 3: Selection, Loops, and Conditionals
+
+## 1) Boolean values in JavaScript
+The boolean literals are **true** and **false**.
+
+In conditionals, non-boolean expressions are coerced into boolean using JavaScript’s
+“truthy/falsy” rules.
+
+**Falsy values include:**  
+0, "", null, undefined, NaN, false.  
+Everything else is truthy.
+
+---
+
+## 2) Types of conditional statements in JavaScript
+- **if**, **else if**, **else**  
+- **switch / case / default**  
+- **Ternary operator:** `condition ? valueA : valueB`  
+
+JavaScript does *not* have `elseif` or `unless`.
+
+---
+
+## 3) How code blocks are delimited
+JavaScript uses **curly braces `{ }`** to group statements.
+
+While single-line statements may omit `{}`, best practice is to always use braces.
+
+---
+
+## 4) Short-circuit evaluation
+JavaScript supports short-circuiting:
+
+- `&&` stops on the first **falsy** value  
+- `||` stops on the first **truthy** value  
+- `??` stops if the left operand is **not null or undefined**  
+- Optional chaining `?.` stops if the left operand is nullish  
+
+**Example of the dangling else problem:**
+
+```js
+if (x)
+  if (y) doA();
+  else doB();   // this else belongs to the inner if
+// Clearer:
+if (x) {
+  if (y) { doA(); }
+  else { doB(); }
+}
+```
+
+## 6) switch details: break, continue, evaluating all conditions
+In JavaScript switch, you typically use break to prevent fall-through; without a break, execution continues into the next case (fall-through), which can be intentional. A return also exits a function (no break needed).
+
+You cannot “continue” through all cases to force evaluation; continue inside a switch (not inside a loop) is a syntax error. Inside a loop that contains a switch, continue applies to the loop, not the switch.  
+
+## 7) Loop types (and how they differ)
+- while (cond) { ... }: checks condition before each iteration.
+- do { ... } while (cond): runs the body at least once, checks condition after.  
+- for (init; cond; step) { ... }: classic counter loop.
+- for...of: iterates values of an iterable (arrays, strings, Maps, Sets, etc.).  
+- for...in: iterates enumerable property keys of an object (use with care and typically with hasOwnProperty).  
+
+
+## 8) Are loop code-block variables treated differently than function code blocks?
+Yes, by choice of declaration:
+- var is function-scoped (or global if outside a function) and ignores block boundaries.
+- let and const are block-scoped — including loop blocks — and create a new binding per iteration in for loops (useful for closures).  
+- Practical effect: for (var i...) leaves i visible after the loop; for (let i...) does not.
