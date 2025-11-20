@@ -407,3 +407,56 @@ Guard rails:
 3. MDN — Memory management  
    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management
 
+# PLP 5: Classes and Inheritance 
+
+## 1. Does JavaScript support objects or something similar?
+Yes. JavaScript is an object-oriented language with a prototype-based model.  
+Objects can be created using object literals (`{}`), constructor functions, or ES6 classes.  
+Unlike class-based languages like Java or C++, JavaScript objects inherit from other objects via the prototype chain.
+
+## 2. Naming conventions for objects, instance variables, and functions
+- Constructor functions and classes use **PascalCase** (e.g., `Person`, `Student`).  
+- Object properties and methods use **camelCase** (e.g., `firstName`, `getAge`).  
+- Private fields (ES2022+) may use the `#` prefix, e.g. `#balance`.
+
+These conventions are not enforced by the language but are standard in the community.
+
+## 3. Standard methods similar to Java’s toString() or Python’s __str__
+Yes.  
+Every JavaScript object inherits `toString()` from `Object.prototype`, which can be overridden in classes.  
+There are also optional conventions like:
+- `valueOf()` for numeric coercion  
+- Custom `toJSON()` used automatically by `JSON.stringify()`
+
+## 4. How does inheritance work? Does JS support multiple inheritance?
+JavaScript uses **single inheritance through the prototype chain**, implemented through:
+- `extends` keyword in ES6 classes  
+- `Object.create()` for manual prototype inheritance  
+
+JavaScript does **not** support multiple inheritance of classes.  
+However, it supports **mixins**, which allow composing behavior from multiple sources.
+
+## 5. How does JavaScript resolve overloaded method names?
+JavaScript does not support true method overloading (same name, different signatures).  
+If you redefine a method in a subclass, it **overrides** the parent method.  
+Resolution happens through the prototype chain:
+- First look on the instance
+- Then the class prototype
+- Then the parent class prototype  
+- Continue up the chain until `Object.prototype`
+
+If not found, JS throws a TypeError when calling the method.
+
+## 6. Other important details
+- Methods inside classes use a hidden `[[HomeObject]]` binding so `super.method()` works.
+- Arrow functions **cannot be used** as class methods when `this` is required, because they don’t bind `this`.
+- Everything in JavaScript is an object except primitive values, but primitives temporarily “box” into objects when accessing methods (e.g., `"hi".toUpperCase()`).
+
+## Sources
+MDN Web Docs — Classes  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes  
+MDN Web Docs — Inheritance and the Prototype Chain  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain  
+MDN Web Docs — Object toString()  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString  
+
