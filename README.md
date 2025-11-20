@@ -224,3 +224,186 @@ Yes, by choice of declaration:
 - var is function-scoped (or global if outside a function) and ignores block boundaries.
 - let and const are block-scoped — including loop blocks — and create a new binding per iteration in for loops (useful for closures).  
 - Practical effect: for (var i...) leaves i visible after the loop; for (let i...) does not.
+
+# PLP 4: Functions in JavaScript
+
+## 1) What is the syntax for declaring a function in JavaScript?
+
+JavaScript supports **function declarations**, **function expressions**, and **arrow functions**.
+
+```js
+// function declaration (hoisted)
+function add(a, b) { return a + b; }
+
+// function expression (not hoisted as a callable)
+const addExpr = function (a, b) { return a + b; };
+
+// arrow function (expression form; concise syntax)
+const addArrow = (a, b) => a + b;
+```
+
+Function declarations are **hoisted**, so you can call them earlier in the file.  
+Function expressions and arrow functions **must be defined before use**.
+
+### Placement rules
+- In classic scripts: function declarations can appear anywhere and still be used earlier.
+- In ES modules: declarations are hoisted, but proper `import/export` is required.
+
+---
+
+## 2) Are there rules about where the function has to be placed so it can run?
+
+- Function declarations → **can be placed below their first use** (hoisted).  
+- Function expressions & arrow functions → **must be defined before use**.  
+- In modules → you must export/import correctly for visibility.
+
+---
+
+## 3) Does JavaScript support recursive functions?
+
+Yes. Any function can call itself:
+
+```js
+function factorial(n) {
+  if (n === 0 || n === 1) return 1;
+  return n * factorial(n - 1);
+}
+```
+
+*Note:* ES2015 defined proper tail calls, but most engines don’t implement them.
+
+---
+
+## 4) Can functions accept multiple parameters? Can they be different types?
+
+Yes. JavaScript is dynamically typed.
+
+Supports:
+- **Default parameters:** `function f(x = 0) { ... }`
+- **Rest parameters:** `function sum(...nums) { ... }`
+
+Example:
+
+```js
+function mix(a, b, c = 0) {
+  return [typeof a, typeof b, typeof c];
+}
+```
+
+---
+
+## 5) Can functions return multiple values?
+
+JavaScript only returns **one value**, but that value can be an array or object.
+
+```js
+function coords() { return { x: 10, y: 20 }; }
+const { x, y } = coords();
+
+function pair() { return [10, 20]; }
+const [first, second] = pair();
+```
+
+Returning objects is self-documenting.
+
+---
+
+## 6) Is JavaScript pass-by-reference or pass-by-value?
+
+JavaScript is **pass-by-value**.
+
+However, objects/arrays/functions are **references**, and the reference itself is passed by value.
+
+Meaning:
+- Reassigning a parameter does **not** affect caller.
+- Mutating a property **does** affect caller.
+
+Behavior shown by `mutateThings()`:
+- Primitive stays unchanged.
+- Object property changes persist.
+
+---
+
+## 7) Where are arguments, parameters, and locals stored?
+
+Conceptually:
+- Each function call creates a **stack frame** (execution context).
+- Objects/arrays/functions live on the **heap**.
+- Stack frames hold **references** to heap objects.
+
+Mental model: **primitives → stack**, **objects → heap**.
+
+---
+
+## 8) What are JavaScript’s scoping rules?
+
+- **Lexical scope**: variables resolved by where code is written.
+- **var** → function-scoped  
+- **let/const** → block-scoped  
+- If an inner function uses an outer variable → **closure** preserves it.
+
+Example:
+
+```js
+function makeCounter() {
+  let count = 0;
+  return function () {
+    count += 1;
+    return count;
+  };
+}
+```
+
+`count` persists.
+
+---
+
+## 9) Are side effects possible? Any guard rails?
+
+Yes. JavaScript frequently has side effects.
+
+Guard rails:
+- `"use strict"` or ES modules stop unsafe patterns.
+- `const` prevents rebinding.
+- `Object.freeze()` prevents mutation.
+- Functional style helps avoid side effects.
+
+---
+
+## 10) Where are local variable values stored (stack vs heap)?
+
+- Primitives → stored directly in the stack frame.
+- Objects/functions/arrays → stored on the heap.
+- Closures can preserve variables beyond a single call.
+
+---
+
+## 11) Other important aspects
+
+- **Hoisting:** declarations hoisted; expressions & arrows not callable early.
+- **Spread & rest** help avoid mutation.
+- **Async/await** essential for non-blocking I/O.
+- **Modules** improve structure.
+- **Error handling** with `throw` and `try/catch`.
+
+---
+
+## How the provided code satisfies the assignment
+
+- `multiply(a, b)` → returns number.  
+- `factorial(n)` → demonstrates recursion.  
+- `splitInTwo(str)` → returns two values via object.  
+- Variables store returned values.  
+- `mutateThings(prim, box)` → demonstrates reference vs primitive behavior.
+
+---
+
+## Sources
+
+1. MDN — Functions  
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
+2. MDN — Objects, reference vs value  
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+3. MDN — Memory management  
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management
+
