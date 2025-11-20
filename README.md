@@ -65,6 +65,7 @@ Create an `.html` file and include JavaScript in a `<script>` tag. For example:
 // This is a single-line comment
 /* This is a
    multi-line comment */
+```
 
 # PLP 2: Data Types and Naming Conventions (JavaScript)
 
