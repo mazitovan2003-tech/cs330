@@ -136,7 +136,23 @@ Assignment Example: "5" + 6
 - Implicit coercion surprises (==, +), prefers strict operators and explicit conversion 
 - Common complex types: Objects, Arrays, Map, Set, TypedArray, Date, Promise 
 
+## Sources 
 
+https://developer.mozilla.org/en-US/docs/Glossary/Identifier
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Reserved_identifier
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar
+https://developer.mozilla.org/en-US/docs/Glossary/Primitive
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
+https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators
+https://developer.mozilla.org/en-US/docs/Glossary/Type_Conversion
+https://developer.mozilla.org/en-US/docs/Glossary/Hoisting
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures
 
 
 # PLP 3: Selection, Loops, and Conditionals
