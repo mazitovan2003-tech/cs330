@@ -225,6 +225,18 @@ Yes, by choice of declaration:
 - let and const are block-scoped — including loop blocks — and create a new binding per iteration in for loops (useful for closures).  
 - Practical effect: for (var i...) leaves i visible after the loop; for (let i...) does not.
 
+## Sources  
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+https://developer.mozilla.org/en-US/docs/Glossary/Falsy
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handlinghttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else#dangling_else_problem
+
 # PLP 4: Functions in JavaScript
 
 ## 1) What is the syntax for declaring a function in JavaScript?
@@ -331,7 +343,7 @@ Conceptually:
 - Objects/arrays/functions live on the **heap**.
 - Stack frames hold **references** to heap objects.
 
-Mental model: **primitives → stack**, **objects → heap**.
+
 
 ---
 
@@ -372,8 +384,8 @@ Guard rails:
 
 ## 10) Where are local variable values stored (stack vs heap)?
 
-- Primitives → stored directly in the stack frame.
-- Objects/functions/arrays → stored on the heap.
+- Primitives - stored directly in the stack frame.
+- Objects/functions/arrays - stored on the heap.
 - Closures can preserve variables beyond a single call.
 
 ---
