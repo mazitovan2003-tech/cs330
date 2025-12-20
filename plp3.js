@@ -1,11 +1,6 @@
-#!/usr/bin/env node
-'use strict';
-
 //PLP 3 — JavaScript control flow & boolean logic
 
-
-
- //1) One-condition if/else
+//1) One-condition if/else
  
 function oneConditionIfElse(x) {
   // In JS, any expression is coerced to a boolean in an if(...)
